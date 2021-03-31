@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import ClickCounter from './components/ClickCounter';
+import ComponentC from './components/ComponentC';
+import Counter from './components/Counter';
+import HoverCounter from './components/HoverCounter';
+import { UserProvider } from './components/UserContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <UserProvider value="Dalia">
+          <ComponentC/>
+        </UserProvider>
+        <hr/>
+        <h1>Render Props Pattern</h1>
+        <Counter
+            render={(count, incrementHandler) => (
+                <ClickCounter
+                    count={count}
+                    incrementHandler={incrementHandler}
+                />
+            )}
+        ></Counter>
+        <Counter
+            render={(count, incrementHandler) => (
+                <HoverCounter
+                    count={count}
+                    incrementHandler={incrementHandler}
+                />
+            )}
+        ></Counter>
+      </div>
   );
 }
 
